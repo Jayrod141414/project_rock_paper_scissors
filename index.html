@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <script>
+      
+      var computerSelection;
+      var playerSelection;
+      var displayMessage;
+      var overallScore = [0,0] //Index 0 is the player, index 1 is the computer
+
+      function computerPlay(){
+        var choices = ["rock" , "paper" , "scissors"];
+        var index = Math.floor(Math.random() * choices.length);
+        var choice = choices[index];
+        return choice;
+      }
+
+      function matchOutput(player , computer){
+        message = ("It's a tie! " + player + " vs. " + computer);
+        return message;
+      }
+
+      function loseOutput(player , computer){
+        message = ("You Lose! " + computer + " beats " + player);
+        return message;
+      }
+
+      function winOutput(player , computer){
+        message = ("You Win! " + player + " beats " + computer);
+        return message;
+      }
+
+      function game(){
+        playerSelection = prompt();
+        computerSelection = computerPlay();
+        var gameScore = [0,0]
+
+        if (playerSelection == "rock" && computerSelection == "rock"){
+          displayMessage = matchOutput(playerSelection , computerSelection);
+        }else if (playerSelection == "paper" && computerSelection == "paper"){
+          displayMessage = matchOutput(playerSelection , computerSelection);
+        }else if (playerSelection == "scissors" && computerSelection == "scissors"){
+          displayMessage = matchOutput(playerSelection , computerSelection);
+        }else if (playerSelection == "rock" && computerSelection == "scissors"){
+          displayMessage = winOutput(playerSelection , computerSelection);
+          gameScore = [1,0]
+        }else if (playerSelection == "paper" && computerSelection == "rock"){
+          displayMessage = winOutput(playerSelection , computerSelection);
+          gameScore = [1,0]
+        }else if (playerSelection == "scissors" && computerSelection == "paper"){
+          displayMessage = winOutput(playerSelection , computerSelection);
+          gameScore = [1,0]
+        }else{
+          displayMessage = loseOutput(playerSelection , computerSelection);
+          gameScore = [0,1]
+        }
+
+        alert(displayMessage);
+        return gameScore;
+      }
+
+      var i;
+
+      for (i = 0; i < 5; i++){
+        var interimScore = game()
+        for (a =0; a < 2; a++){
+          overallScore[a] = overallScore[a] + interimScore[a];
+        }
+      }
+
+      var PlayerFinal = overallScore[0];
+      var ComputerFinal = overallScore[1];
+      if (PlayerFinal == ComputerFinal){
+        alert("Final score is a Tie! Player Score: " + PlayerFinal + " Computer Score: " + ComputerFinal);
+      }else if (PlayerFinal > ComputerFinal){
+        alert("You Win! Player Score: " + PlayerFinal + " Computer Score: " + ComputerFinal);
+      }else
+        alert("You Lose! Player Score: " + PlayerFinal + " Computer Score: " + ComputerFinal);
+
+      
+      
+    </script>
+  </body>
+</html>
